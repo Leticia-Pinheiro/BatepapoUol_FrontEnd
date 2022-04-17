@@ -28,9 +28,8 @@ function adicionarNome(){
     promisse.catch(corrigirErro)
 }
 
-function ok(){
-    alert("ok")
-    // pegarMensagens()
+function ok(){    
+    pegarMensagens()
 }
 
 function corrigirErro(error){    
@@ -39,7 +38,43 @@ function corrigirErro(error){
         pegarNomes()
 }
 
+function pegarMensagens(){
+    const promisse = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
+    promisse.then(carregarMsg)    
+}
 
+function carregarMsg(response){
+    mensagens = response.data
+    renderizarMsg()
+}
+
+function renderizarMsg(){
+    const ulMensagens = document.querySelector(".mensagens")
+    ulMensagens.innerHTML = ""
+
+    for (i=0; i<mensagens.length; i++){
+        if(mensagens[i].type ==="status"){
+            ulMensagens.innerHTML += `
+        <li class = "msgStatus">
+            (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+        </li>`
+        }
+        if(mensagens[i].type ==="private_message"){
+            ulMensagens.innerHTML += `
+        <li class = "msgReservada">
+            (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+        </li>`
+        }
+
+        if(mensagens[i].type ==="message"){
+            ulMensagens.innerHTML += `
+        <li class = "msgNormal">
+            (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+        </li>`
+        }
+                
+    }
+}
 
 
 

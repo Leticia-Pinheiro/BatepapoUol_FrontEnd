@@ -5,6 +5,10 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    
 }
 
 .topo > img{
@@ -27,6 +31,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
 }
 
 .final.texto{
@@ -39,4 +46,43 @@
 .final > ion-icon{
     font-size: 30px;
     margin-right: 27px;
+}
+
+.mensagens{
+    margin: 100px 0;
+    width: 100%;
+    
+}
+
+li{
+    background-color: aqua;
+    font-size: 14px;
+    font-family: 'Roboto';
+    padding: 12px;
+    margin: 4px 0;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 2px;
+
+}
+
+li > h1{
+    font-weight: 700;
+}
+
+strong{
+    font-weight: 700;
+    margin: 0 3px;
+}
+
+.msgStatus{
+    background-color: #DCDCDC;
+}
+
+.msgReservada{
+    background-color: #FFDEDE;
+}
+
+.msgNormal{
+    background-color: #FFFFFF;
 }
