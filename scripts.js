@@ -73,20 +73,16 @@ function renderizarMsg(){
                 ulMensagens.innerHTML += `
                 <li class = "msgReservada">
                     (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
-                </li>`
-                
-            
+                </li>`           
         }
-            
-
         if(mensagens[i].type ==="message"){
             ulMensagens.innerHTML += `
         <li class = "msgNormal">
             (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
         </li>`
-        }
-                
+        }             
     }
+    ulMensagens.lastChild.scrollIntoView()
 }
 
 function adicionarMensagem(){
