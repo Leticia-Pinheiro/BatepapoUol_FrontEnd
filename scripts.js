@@ -1,7 +1,3 @@
-// const promisseEntrar = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants ")
-// const promisseMConexao = axios.get("https://mock-api.driven.com.br/api/v6/uol/status")
-// const promisseBuscarMsg = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
-// const promisseEnviarMsg = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
 let nomes = []
 let mensagens = []
 let nome = prompt("Qual o seu nome?")
@@ -41,6 +37,7 @@ function verificação(){
         name: nome
     }
     const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nomeUser)
+    // promisse.catch(pegarNomes)
 }
 
 setInterval(verificação, 5000)
@@ -67,14 +64,20 @@ function renderizarMsg(){
         <li class = "msgStatus">
             (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
         </li>`
+        }        
+        if(mensagens[i].type ==="private_message" && mensagens[i].to === nome){            
+            ulMensagens.innerHTML += `
+            <li class = "msgReservada">
+                (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+            </li>`           
         }
-        if(mensagens[i].type ==="private_message"){
-            
-                ulMensagens.innerHTML += `
-                <li class = "msgReservada">
-                    (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
-                </li>`           
-        }
+        //if(mensagem[i].to === nome){            
+        //     ulMensagens.innerHTML += `
+        //     <li class = "msgReservada">
+        //         (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+        //     </li>`           
+        // }
+    
         if(mensagens[i].type ==="message"){
             ulMensagens.innerHTML += `
         <li class = "msgNormal">
@@ -99,7 +102,8 @@ function adicionarMensagem(){
 
     promisse.then(pegarMensagens)
     
-    msg.innerHTML = ""
+    const caixa = document.querySelector(".txtEscrever").innerHTML
+    caixa.innerHTML = ""
 }
 
 
