@@ -7,8 +7,7 @@
     align-items: center;
     position: fixed;
     top: 0;
-    background-color: #fff;
-    
+    background-color: #fff;    
 }
 
 .topo > img{
@@ -36,11 +35,16 @@
     background-color: #fff;
 }
 
-.final.texto{
+.txtEscrever{
     font-size: 18px;
     font-family: 'Roboto';
     font-style: italic;
     font-weight: 400;
+    color:black;
+    margin-left: 27px;
+    float: left;
+    background-color: transparent; 
+    border: none;  
 }
 
 .final > ion-icon{
@@ -55,13 +59,16 @@
 }
 
 li{
+    width: 375px;
     background-color: aqua;
+    width: 100%;
     font-size: 14px;
     font-family: 'Roboto';
     padding: 12px;
     margin: 4px 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+    word-wrap:break-word;
     border-radius: 2px;
 
 }
@@ -81,6 +88,10 @@ strong{
 
 .msgReservada{
     background-color: #FFDEDE;
+}
+
+.msgRes{
+    background-color: aqua;
 }
 
 .msgNormal{

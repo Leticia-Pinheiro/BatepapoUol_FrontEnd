@@ -5,8 +5,9 @@
 let nomes = []
 let mensagens = []
 let nome = prompt("Qual o seu nome?")
-
 pegarNomes();
+
+
 
 function pegarNomes(){
     const promisse = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants")
@@ -24,13 +25,10 @@ function adicionarNome(){
     }
     const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", novoNome)
 
-    promisse.then(ok)
+    promisse.then(pegarMensagens)
     promisse.catch(corrigirErro)
 }
 
-function ok(){    
-    pegarMensagens()
-}
 
 function corrigirErro(error){    
     if(error.response.status === 400)    
@@ -38,10 +36,21 @@ function corrigirErro(error){
         pegarNomes()
 }
 
+function verificação(){
+    const nomeUser = {
+        name: nome
+    }
+    const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nomeUser)
+}
+
+setInterval(verificação, 5000)
+
 function pegarMensagens(){
     const promisse = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
     promisse.then(carregarMsg)    
 }
+
+setInterval(pegarMensagens, 3000)
 
 function carregarMsg(response){
     mensagens = response.data
@@ -60,11 +69,15 @@ function renderizarMsg(){
         </li>`
         }
         if(mensagens[i].type ==="private_message"){
-            ulMensagens.innerHTML += `
-        <li class = "msgReservada">
-            (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
-        </li>`
+            
+                ulMensagens.innerHTML += `
+                <li class = "msgReservada">
+                    (${mensagens[i].time}) <strong>${mensagens[i].from}</strong> para <strong>${mensagens[i].to}</strong> ${mensagens[i].text}
+                </li>`
+                
+            
         }
+            
 
         if(mensagens[i].type ==="message"){
             ulMensagens.innerHTML += `
@@ -75,6 +88,25 @@ function renderizarMsg(){
                 
     }
 }
+
+function adicionarMensagem(){
+    const msg = document.querySelector(".txtEscrever").value    
+    
+    const novaMsg = {       
+        from: nome,
+	    to: "Todos",
+	    text: msg,
+	    type: "message"
+    }
+    // console.log(novaMsg)
+    const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", novaMsg)
+
+    promisse.then(pegarMensagens)
+    
+    msg.innerHTML = ""
+}
+
+
 
 
 
